@@ -1,5 +1,5 @@
 import App from "components/App";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Link } from "@material-ui/core";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -23,6 +23,7 @@ export default function IndexPage() {
     <App>
       <form>
         <TextField
+          type="email"
           label="email"
           autoComplete="email"
           onChange={(e) => setMail(e.currentTarget.value)}
@@ -35,7 +36,7 @@ export default function IndexPage() {
         <Button onClick={handleLogin}>signup</Button>
       </form>
       <NextLink href="/login" passHref>
-        <Button>login</Button>
+        <Link>loginはこちら</Link>
       </NextLink>
     </App>
   );
