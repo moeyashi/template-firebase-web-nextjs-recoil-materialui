@@ -2,17 +2,17 @@ import App from "components/App";
 import { TextField, Button } from "@material-ui/core";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useFirebaseLogin } from "hooks/states/useFirebaseUser";
 import NextLink from "next/link";
+import { useSignUp } from "hooks/usecases/useSignUp";
 
 export default function IndexPage() {
   const router = useRouter();
-  const login = useFirebaseLogin();
+  const signup = useSignUp();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = async () => {
     try {
-      await login(mail, password);
+      await signup(mail, password);
     } catch (e) {
       alert(e);
       return;
@@ -32,10 +32,10 @@ export default function IndexPage() {
           label="password"
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        <Button onClick={handleLogin}>login</Button>
+        <Button onClick={handleLogin}>signup</Button>
       </form>
-      <NextLink href="/signup" passHref>
-        <Button>新規登録</Button>
+      <NextLink href="/login" passHref>
+        <Button>login</Button>
       </NextLink>
     </App>
   );

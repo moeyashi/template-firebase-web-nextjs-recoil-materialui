@@ -24,7 +24,7 @@ const User = () => {
     </>
   ) : (
     <NextLink href="/login" passHref>
-      <Button>login</Button>
+      <Button color="inherit">login</Button>
     </NextLink>
   );
 };

@@ -1,6 +1,8 @@
 import App from "components/App";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Paper, Grid, Container } from "@material-ui/core";
 import { useCounterValue, useSetCounter } from "hooks/states/useCounter";
+import { TodoList } from "components/TodoList";
+import { AddTodo } from "components/AddTodo";
 
 const CountUpButton = () => {
   const setCount = useSetCounter();
@@ -20,16 +22,30 @@ const CountDownButton = () => {
 
 const Count = () => {
   const count = useCounterValue();
-  return <Typography>count: {count}</Typography>;
+  return <>count: {count}</>;
 };
 
 export default function IndexPage() {
   return (
     <App>
-      <Typography variant="h1">hello world</Typography>
-      <Count />
-      <CountUpButton />
-      <CountDownButton />
+      <Container>
+        <Typography variant="h1">hello world</Typography>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Paper>
+              <Count />
+              <CountUpButton />
+              <CountDownButton />
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper>
+              <AddTodo />
+              <TodoList />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
     </App>
   );
 }

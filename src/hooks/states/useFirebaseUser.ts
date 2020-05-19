@@ -1,11 +1,22 @@
 import { atom, useSetRecoilState, useRecoilValue } from "recoil";
 import { firebaseAuth } from "lib/firebase";
 
-const firebaseUserState = atom<firebase.User>({
+export const firebaseUserState = atom<firebase.User>({
   key: "firebaseUserState",
   default: firebaseAuth ? firebaseAuth.currentUser : null,
   dangerouslyAllowMutability: true,
 });
+
+export const useFirebaseSignUp = () => {
+  const setter = useSetRecoilState(firebaseUserState);
+  return async (email: string, password: string) => {
+    const user = await firebaseAuth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    setter(user.user);
+  };
+};
 
 export const useFirebaseLogin = () => {
   const setter = useSetRecoilState(firebaseUserState);
